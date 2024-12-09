@@ -1,5 +1,5 @@
-import Banner from "./components/Banner";
 import Link from "next/link";
+import Banner from "./components/Banner.client";
 
 export default function Home() {
   const id = "Joseph";
