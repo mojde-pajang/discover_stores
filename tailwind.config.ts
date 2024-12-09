@@ -11,6 +11,11 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        gray: {
+          950: "hsla(0, 0%, 100%, 0.7);",
+          951: "hsla(0, 0%, 100%, 0.4);",
+          952: "#373b64",
+        },
       },
       backgroundImage: {
         gradient: "url('/static/bg.jpg')",
