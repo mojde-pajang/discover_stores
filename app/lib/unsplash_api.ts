@@ -12,8 +12,6 @@ export async function unsplashPhotos() {
       page: 1,
       perPage: 6,
     });
-
-    console.log(333, photos);
     return photos?.response?.results || [];
   } catch (error) {
     console.error("No photo found", error);

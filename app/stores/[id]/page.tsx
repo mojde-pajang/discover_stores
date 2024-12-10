@@ -18,7 +18,6 @@ async function Page(props: {
   const { params, searchParams } = props;
   const store = await getStore(params?.id, searchParams?.id);
 
-  console.log(store);
   if (!store) {
     return (
       <div className="h-full pb-80">
