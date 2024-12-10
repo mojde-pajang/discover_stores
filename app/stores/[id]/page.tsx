@@ -11,9 +11,14 @@ export async function generateStaticParams() {
     id: store.id,
   }));
 }
-async function Page({ params }: any) {
-  const { id } = await params;
-  const store = await getStore(id);
+async function Page(props: {
+  params: { id: string };
+  searchParams: { id: number };
+}) {
+  const { params, searchParams } = props;
+  const store = await getStore(params?.id, searchParams?.id);
+
+  console.log(store);
   if (!store) {
     return (
       <div className="h-full pb-80">
