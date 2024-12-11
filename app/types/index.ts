@@ -51,4 +51,11 @@ export type Store = {
   name: string;
   address: string;
   imageUrl: string;
+  vote: number;
+};
+
+export type AirtableRecord = {
+  id: string;
+  recordId: string;
+  fields: Store;
 };

@@ -1,3 +1,4 @@
+import { createStoreInDB, getStoreFromDB } from "@/app/lib/airtable";
 import { getStore, getStores } from "@/app/lib/stores";
 import { Store } from "@/app/types";
 import Image from "next/image";
@@ -10,6 +11,13 @@ export async function generateStaticParams(): Promise<{ id: string }[]> {
     id: store.id,
   }));
 }
+
+async function getData(storeID: string, searchID: number) {
+  const store = await getStore(storeID, Number(searchID));
+  if (store) await createStoreInDB(storeID, store);
+
+  return store;
+}
 async function Page({
   params,
   searchParams,
@@ -19,7 +27,7 @@ async function Page({
 }) {
   const storeID = (await params).id;
   const searchID = (await searchParams).id;
-  const store = await getStore(storeID, Number(searchID));
+  const store = await getData(storeID, Number(searchID));
 
   if (!store) {
     return (
