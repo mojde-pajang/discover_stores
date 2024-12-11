@@ -4,19 +4,22 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export async function generateStaticParams() {
-  const stores = await getStores();
-
+export async function generateStaticParams(): Promise<{ id: string }[]> {
+  const stores = await getStores("-74.00763403803957%2C40.71322172252451", 6);
   return stores.map((store: Store) => ({
     id: store.id,
   }));
 }
-async function Page(props: {
-  params: { id: string };
-  searchParams: { id: number };
+async function Page({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { params, searchParams } = props;
-  const store = await getStore(params?.id, searchParams?.id);
+  const storeID = (await params).id;
+  const searchID = (await searchParams).id;
+  const store = await getStore(storeID, Number(searchID));
 
   if (!store) {
     return (

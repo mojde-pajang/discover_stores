@@ -13,14 +13,17 @@ const transformCoffeeStore = (
     address: shop.properties.full_address,
     imageUrl:
       photos[id]?.urls.small ||
-      "https://pixabay.com/get/g9bf0f24f4cecb3174bd0baac9f968953ca8591f23c73d73a0f5ff59986ff89751474bfba78e53b43b6a5143eadf01c52_640.jpg",
+      "https://images.unsplash.com/photo-1528731918315-d95040a988ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2ODQ4MzR8MHwxfHNlYXJjaHw1fHxjb2ZmZWUlMjBzdG9yZXxlbnwwfHx8fDE3MzM4MTM2NTZ8MA&ixlib=rb-4.0.3&q=80&w=400",
   };
 };
 
-export const getStores = async (): Promise<[] | Store[]> => {
+export const getStores = async (
+  longLat: string,
+  limit: number
+): Promise<Store[]> => {
   try {
     const data = await fetch(
-      `https://api.mapbox.com/search/geocode/v6/forward?q=coffee&country=us&limit=6&proximity=-74.00763403803957%2C40.71322172252451&types=place&access_token=${process.env.MAPBOX_TOKEN}`
+      `https://api.mapbox.com/search/geocode/v6/forward?q=coffee&limit=${limit}&proximity=${longLat}&types=place&access_token=${process.env.MAPBOX_TOKEN}`
     );
 
     const photos = await unsplashPhotos();
