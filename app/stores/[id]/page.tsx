@@ -1,4 +1,5 @@
-import { createStoreInDB, getStoreFromDB } from "@/app/lib/airtable";
+import Upvote from "@/app/components/voting.client";
+import { createStoreInDB } from "@/app/lib/airtable";
 import { getStore, getStores } from "@/app/lib/stores";
 import { Store } from "@/app/types";
 import Image from "next/image";
@@ -13,10 +14,18 @@ export async function generateStaticParams(): Promise<{ id: string }[]> {
 }
 
 async function getData(storeID: string, searchID: number) {
-  const store = await getStore(storeID, Number(searchID));
-  if (store) await createStoreInDB(storeID, store);
+  const StoreFromMapbox = await getStore(storeID, Number(searchID));
+  let createdStore;
+  if (StoreFromMapbox) {
+    createdStore = await createStoreInDB(storeID, StoreFromMapbox);
+  }
 
-  return store;
+  return createdStore
+    ? createdStore[0]
+    : {
+        ...StoreFromMapbox,
+        vote: 0,
+      };
 }
 async function Page({
   params,
@@ -65,6 +74,7 @@ async function Page({
 
         <div className={`glass mt-12 flex-col rounded-lg p-4 lg:mt-48`}>
           <h2 className=" text-xl font-bold">{store.address}</h2>
+          <Upvote voting={store?.vote ? store?.vote : 0} />
         </div>
       </div>
     </div>

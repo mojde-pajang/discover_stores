@@ -6,7 +6,7 @@ const transformCoffeeStore = (
   shop: Feature,
   photos: Basic[],
   id: number
-): Store => {
+): Partial<Store> => {
   return {
     id: shop.id || shop?.properties?.mapbox_id,
     name: shop.properties.name,
