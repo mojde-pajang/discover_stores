@@ -1,4 +1,4 @@
-import Upvote from "@/app/components/voting.client";
+import Upvote from "@/app/components/Upvote.client";
 import { createStoreInDB } from "@/app/lib/airtable";
 import { getStore, getStores } from "@/app/lib/stores";
 import { MetadataParams, Store } from "@/app/types";
