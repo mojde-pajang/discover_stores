@@ -32,10 +32,11 @@ export const getStores = async (
       (feature: Feature, idx: number) =>
         transformCoffeeStore(feature, photos, idx)
     );
-    return coffeeStores.length || undefined ? coffeeStores : [];
+    if (coffeeStores.length || undefined) coffeeStores;
+    throw new Error("Couldn't find Stores");
   } catch (error) {
     console.error("Error fetching", error);
-    return [];
+    throw new Error("Error fetching Stores");
   }
 };
 
@@ -52,9 +53,10 @@ export const getStore = async (
     const coffeeStore: Store[] = features?.map((feature: Feature) =>
       transformCoffeeStore(feature, photos, id)
     );
-    return coffeeStore.length > 0 ? coffeeStore[0] : null;
+    if (coffeeStore?.length > 0) return coffeeStore[0];
+    throw new Error("Store not Found");
   } catch (error) {
     console.error("Error fetching", error);
-    return null;
+    throw new Error("Error fetching");
   }
 };
