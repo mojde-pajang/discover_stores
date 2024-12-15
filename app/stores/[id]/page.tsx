@@ -1,7 +1,8 @@
 import Upvote from "@/app/components/voting.client";
 import { createStoreInDB } from "@/app/lib/airtable";
 import { getStore, getStores } from "@/app/lib/stores";
-import { Store } from "@/app/types";
+import { MetadataParams, Store } from "@/app/types";
+import { getDomain } from "@/app/util";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -11,6 +12,27 @@ export async function generateStaticParams(): Promise<{ id: string }[]> {
   return stores.map((store: Store) => ({
     id: store.id,
   }));
+}
+
+export async function generateMetadata({
+  params,
+  searchParams,
+}: MetadataParams) {
+  // read route params
+  const storeID = (await params).id;
+  const searchID = (await searchParams).id;
+
+  const storeFromMapbox = await getStore(storeID, Number(searchID));
+  const { name = "" } = storeFromMapbox ? storeFromMapbox : {};
+
+  return {
+    title: name,
+    description: `${name} - Store page`,
+    metadataBase: getDomain(),
+    alternates: {
+      canonical: `/stores/${storeID}`,
+    },
+  };
 }
 
 async function getData(storeID: string, searchID: number) {

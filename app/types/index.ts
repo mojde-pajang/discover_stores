@@ -59,3 +59,8 @@ export type AirtableRecord = {
   recordId: string;
   fields: Store;
 };
+
+export type MetadataParams = {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
