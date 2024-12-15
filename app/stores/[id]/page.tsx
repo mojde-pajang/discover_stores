@@ -74,7 +74,7 @@ async function Page({
 
         <div className={`glass mt-12 flex-col rounded-lg p-4 lg:mt-48`}>
           <h2 className=" text-xl font-bold">{store.address}</h2>
-          <Upvote voting={store?.vote ? store?.vote : 0} />
+          <Upvote vote={store?.vote ? store?.vote : 0} id={storeID} />
         </div>
       </div>
     </div>

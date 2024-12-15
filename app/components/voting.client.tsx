@@ -1,23 +1,32 @@
+// @ts-ignore
 "use client";
 import Image from "next/image";
+import { upvoteAction } from "../actions";
+import { useActionState } from "react";
 
 export function SubmitButton() {
-  return (
-    <button type="submit" className="bg-purple-900 min-w-[120px]">
-      Up vote!
-    </button>
-  );
+  return <></>;
 }
 
-export default function Upvote({ voting }: { voting: number }) {
+export default function Upvote({ vote, id }: { vote: number; id: string }) {
+  const initialState = {
+    vote,
+    id,
+  };
+  const [state, formAction, isPending] = useActionState(
+    upvoteAction,
+    initialState
+  );
   return (
-    <form>
+    <form action={formAction}>
       <div className="mb-6 flex">
         <Image src="/static/star.svg" width="24" height="24" alt="star icon" />
-        <p className="pl-2">{voting}</p>
+        <p className="pl-2">{state?.vote}</p>
       </div>
 
-      <SubmitButton />
+      <button type="submit" className="bg-purple-900 min-w-[120px]">
+        {isPending ? "Loading..." : "Up vote!"}
+      </button>
     </form>
   );
 }

@@ -53,3 +53,33 @@ export async function createStoreInDB(id: string, storeRecord: Store) {
     console.error("Error on creating or finding records", error);
   }
 }
+
+export async function updateStoreInDB(id: string) {
+  try {
+    if (id) {
+      const filteredStore = await getStoreFromDB(id);
+      const storeInfo = filteredStore[0];
+      const currentVote = storeInfo?.vote;
+      if (filteredStore.length != 0) {
+        const updateRecords = await table("store").update([
+          {
+            id: storeInfo?.recordId,
+            fields: {
+              vote: currentVote + 1,
+            },
+          },
+        ]);
+        const updatedRecord = updateRecords?.map((record: AirtableRecord) => ({
+          ...record?.fields,
+        }));
+        return updatedRecord;
+      } else {
+        return filteredStore;
+      }
+    } else {
+      console.error("Store id is missing");
+    }
+  } catch (error) {
+    console.error("Error on creating or finding records", error);
+  }
+}
