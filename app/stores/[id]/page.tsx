@@ -2,7 +2,6 @@ import Upvote from "@/app/components/Upvote.client";
 import { createStoreInDB } from "@/app/lib/airtable";
 import { getStore, getStores } from "@/app/lib/stores";
 import { MetadataParams, Store } from "@/app/types";
-import { getDomain } from "@/app/util";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -28,7 +27,7 @@ export async function generateMetadata({
   return {
     title: name,
     description: `${name} - Store page`,
-    metadataBase: getDomain(),
+    metadataBase: new URL(process.env.METADATABASE_URL || ""),
     alternates: {
       canonical: `/stores/${storeID}`,
     },
