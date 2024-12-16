@@ -22,7 +22,6 @@ function StoresNearBy() {
       }
     })();
   }, [longLat]);
-  console.log(890, nearByStores);
   const handleClick = () => {
     handleTrackLocation();
   };

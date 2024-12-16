@@ -64,3 +64,8 @@ export type MetadataParams = {
   params: Promise<{ id: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
+
+export type StoreInfo = {
+  recordId: string;
+  vote: number;
+};

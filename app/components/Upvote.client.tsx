@@ -1,12 +1,7 @@
-// @ts-ignore
 "use client";
 import Image from "next/image";
 import { upvoteAction } from "../actions";
 import { useActionState } from "react";
-
-export function SubmitButton() {
-  return <></>;
-}
 
 export default function Upvote({ vote, id }: { vote: number; id: string }) {
   const initialState = {

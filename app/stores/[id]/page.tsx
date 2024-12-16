@@ -58,8 +58,9 @@ async function Page({
 }) {
   const storeID = (await params).id;
   const searchID = (await searchParams).id;
-  const store = await getData(storeID, Number(searchID));
-
+  const fetchedStore = await getData(storeID, Number(searchID));
+  const store =
+    "fields" in fetchedStore ? (fetchedStore?.fields as Store) : fetchedStore;
   if (!store) {
     return (
       <div className="h-full pb-80">
@@ -67,7 +68,7 @@ async function Page({
           <div className="mb-2 mt-24 text-lg font-bold">
             <Link href="/">← Back to home</Link>
           </div>
-          <div>Store not found</div>;
+          <div>Store not found</div>
         </div>
       </div>
     );
