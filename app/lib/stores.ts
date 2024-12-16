@@ -32,7 +32,7 @@ export const getStores = async (
       (feature: Feature, idx: number) =>
         transformCoffeeStore(feature, photos, idx)
     );
-    if (coffeeStores.length || undefined) coffeeStores;
+    if (coffeeStores.length || undefined) return coffeeStores;
     throw new Error("Couldn't find Stores");
   } catch (error) {
     console.error("Error fetching", error);
