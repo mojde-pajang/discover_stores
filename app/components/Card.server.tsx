@@ -22,7 +22,7 @@ function Card({ name, imageUrl, href }: CardType) {
           <Image
             className="rounded-lg shadow-lg"
             src={imageUrl}
-            alt={name}
+            alt="Store Image"
             layout="fill"
             objectFit="cover"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8/+ZNPQAIoQM4xp5zkgAAAABJRU5ErkJggg=="

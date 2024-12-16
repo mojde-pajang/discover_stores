@@ -18,7 +18,7 @@ export default {
         },
       },
       backgroundImage: {
-        gradient: "url('/static/bg.jpg')",
+        gradient: "url('/static/bg.webp')",
       },
     },
   },
