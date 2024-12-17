@@ -26,7 +26,7 @@ function Banner({
         onClick={handleNearByStore}
         className="rounded-md bg-[#1a2c34] px-5 py-4 text-lg font-semibold text-white shadow-sm hover:bg-[#1e3237] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       >
-        {isLocated ? "Locating..." : "See bookstores near you"}
+        {isLocated ? "Locating..." : "See stores near you"}
       </button>
     </>
   );
